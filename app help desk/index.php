@@ -32,7 +32,7 @@
               Login
             </div>
             <div class="card-body">
-              <form action="valida_login.php" method="post">
+              <form method="post" action="valida_login.php">
                 <div class="form-group">
                   <input type="email" class="form-control" placeholder="E-mail" name="email">
                 </div>
@@ -40,9 +40,14 @@
                   <input type="password" class="form-control" placeholder="Senha" name="senha">
                 </div>
 
-                <?php if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?> <!-- verificando se o índice login do array usuarios existe -->
-                  <div class="text-danger">Usuário ou senha inválido(s)</div>
-                <?php } ?>
+                  <?php  if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
+                    <div class="text-danger">Usuário ou senha inválido(s)</div>
+                  <?php } ?>
+
+                  <?php  if(isset($_GET['login']) && $_GET['login'] == 'erroAcesso') { ?>
+                    <div class="text-danger">Faça o login para acessar as outras páginas.</div>
+                  <?php } ?>
+                  
 
                 <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
               </form>
