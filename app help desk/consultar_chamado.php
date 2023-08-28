@@ -1,5 +1,21 @@
 <?php
   require_once 'validador_acesso.php';
+
+  //chamados
+  $chamados = array();
+
+  //abrir o arquivo.hd
+  $arquivo = fopen('arquivo.hd', 'r');
+
+  //percorrer o arquivo.hd enquanto houver registros
+  while(!feof($arquivo)) { //testa pelo fim de um arquivo
+    $registro = fgets($arquivo);
+    $chamados[] = $registro;
+  } 
+
+  //fechar o arquivo aberto 
+  fclose($arquivo);
+
 ?>
 <html>
   <head>
@@ -41,24 +57,31 @@
             </div>
             
             <div class="card-body">
-              
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
 
+              <?php foreach($chamados as $chamado) { ?>
+                <?php
+                  $chamado_dados = explode('#', $chamado);
+
+                  //verificar se o usuario é adm ou não 
+                  if($_SESSION['perfil_id'] == 2) {
+                    //só vamos exibir chamado se for um usuário
+                    if($_SESSION['id'] != $chamado_dados[0]) {
+                      continue; 
+                    }
+                  }
+
+                  if(count($chamado_dados) < 3) { 
+                    continue;
+                  }
+                ?>
+                <div class="card mb-3 bg-light">
+                  <div class="card-body">
+                    <h5 class="card-title"><?=$chamado_dados[1]?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?=$chamado_dados[2]?></h6>
+                    <p class="card-text"><?=$chamado_dados[3]?></p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+              <?php } ?>
 
               <div class="row mt-5">
                 <div class="col-6">

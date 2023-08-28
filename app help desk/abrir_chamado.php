@@ -71,7 +71,7 @@
                       </div>
 
                       <div class="col-6">
-                        <a href="" class="btn btn-lg btn-info btn-block">Abrir</a>
+                        <button href="" class="btn btn-lg btn-info btn-block" type="submit">Abrir</button>
                       </div>
                     </div>
                   </form>
