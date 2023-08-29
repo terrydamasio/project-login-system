@@ -1,41 +1,22 @@
-<?php 
+<?php
 
-    class Login {
-        private $email;
-        private $senha;
+    class Pessoa {
+        const nome = "Terry"; //criar constante
 
-        //capturar valor
-        public function getEmail() {
-            return $this->email;
+        public function exibirNome() {
+            echo self::nome; //referenciar a constante dentro do escopo da função na classe Pessoa
         }
-
-        //como precisamos setar um valor, passamos ele por parametro
-        public function setEmail($e) {
-            $this->email = $e;
-        }
-
-        public function getSenha() {
-            return $this->senha;
-        }
-
-        public function setSenha($s) {
-            $this->senha = $s;
-        }
-
-        public function logar() {
-            if($this->email == 'teste@teste.com.br' && $this->senha == '123') {
-                echo 'logado com sucesso!  <br>';
-            } else {
-                echo 'Login inválido  <br>';
-            }
-        }
-
     }
 
-    $logar = new Login();
-    $logar->setEmail("terry@teste.com.br");
-    $logar->logar();
+    class Terry extends Pessoa {
+        const nome = "Damasio";
 
-    echo $logar->getEmail();
+        public function exibirNome() {
+            echo parent::nome; //referenciar a constante dentro do escopo da função na classe pai (Pessoa)
+        }
+    }
 
-?>  
+    $terry = new Terry();
+    $terry->exibirNome();
+
+?>
