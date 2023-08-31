@@ -1,32 +1,13 @@
 <?php
 
-    class Pedido {
-        public $numero;
-        public $cliente;
-    }
+    require_once 'vendor/autoload.php';
 
-    class Cliente {
-        public $nome;
-        public $endereco;
-    }
+    $produto = new \App\Model\Produto();
+    $produto->setNome('Notebook Dell');
+    $produto->setDescricao('I5, 4G');
 
-    $cliente = new Cliente();
-    $cliente->nome = "Terry Damasio Santos";
-    $cliente->endereco = "Rua xxx, 332 - Recife";
+    $produtoDao = new \App\Model\ProdutoDao();
+    $produtoDao->create($produto);
 
-    $pedido = new Pedido();
-    $pedido->numero = "123";
-    $pedido->cliente = $cliente;
-
-    $dados = [
-        'numero' => $pedido->numero,
-        'nome_cliente' => $pedido->cliente->nome,
-        'endereco_clietne' => $pedido->cliente->endereco
-    ];
-
-    var_dump($dados);
-
-
-
-
+    
 ?>
