@@ -6,7 +6,7 @@
         private $user = 'root';
         private $pass = '';
 
-        public function connection() {
+        public function conectar() {
 
             try {
                 

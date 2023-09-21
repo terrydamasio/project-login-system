@@ -6,7 +6,7 @@
         private $tarefa;
         private $data_cadastro;
 
-        public function __get($name){
+        public function __get($name) {
             return $this->$name;
         }
 
