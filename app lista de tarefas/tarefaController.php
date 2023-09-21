@@ -1,6 +1,6 @@
 <?php
 
-    require_once "./lista_de_tarefas_seguranca/tarefaController.php";
+    require_once "./private/tarefaController.php";
 
     
   
