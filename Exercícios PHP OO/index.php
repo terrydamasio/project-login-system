@@ -1,45 +1,60 @@
-<?php 
-    class Login {
-        private $user = ['email' => 'terrydamasio.dev@gmail.com', 'senha' => '#Terrydamasio2021', 'username' => 'Terry Damasio'];
-        private $email;
-        private $senha;
-        
-        public function __construct($email, $senha) {
-            $this->setEmail($email);
-            $this->setSenha($senha);
+<?php
+    //mysql:host=<host_name>;dbname=<nome_database>; user; pass  
+    class Conexao {
+        private $host = 'localhost';
+        private $dbname = 'teste_pdo';
+        private $user = 'root';
+        private $pass = '';
+
+        public function conectar() {
+            //if(!empty($_POST['usuario']) && !empty($_POST['senha'])) {
+                try {
+                    $conexao = new PDO(
+                        "mysql:host=$this->host;dbname=$this->dbname",
+                        $this->user, 
+                        $this->pass);
+                    
+                    return $conexao;
+
+                } catch (PDOException $e) {
+                    echo 'Erro: ' . $e->getCode(). '<br>' . 'Mensagem: ' . $e->getMessage();
+                }
+            //}
         }
 
-        public function getEmail() {
-            return $this->email;
-        }
-        
-        public function setEmail($email) {
-            $this->email = $email;
-        }
+        public function inserir() {
+            $conexao = $this->conectar();
 
-        public function getSenha() {
-            return $this->senha;
-        }
-        
-        public function setSenha($senha) {
-            $this->senha = $senha;
-        }
-        
-        public function verificaLogin() {
-            if($this->user['email'] == $this->email && $this->user['senha'] == $this->senha) {
-                echo 'Logado com sucesso! ' .'<hr>'. 'Seu login: ' .'<br>'. 'Email: ' . $this->getEmail() .'<br>'. 'Senha: ' . $this->getSenha() .'<br>'. 'Username: ' . $this->user['username'];
-            } else if ($this->user['email'] != $this->email && $this->user['senha'] == $this->senha){
-                echo 'E-mail inválido. Tente novamente';
-            } else if ($this->user['email'] == $this->email && $this->user['senha'] != $this->senha){
-                echo 'Senha inválida. Tente novamente';
-            } else {
-                echo 'Login inválido. Tente novamente.';
-            }
+            $query = "insert into tb_usuarios(nome, email, senha) values(:nome, :email, :senha)";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindValue(':nome', $_POST['usuario']);
+            $stmt->bindValue(':email', $_POST['email']);
+            $stmt->bindValue(':senha', $_POST['senha']);
+            $stmt->execute();
         }
     }
 
-    $login = new Login('terrydamasio.dev@gmail.com', '#Terrydamasio2021');
-    $login->verificaLogin();
-
-
+    $conexao = new Conexao();
+    $conexao->conectar();
+    $conexao->inserir();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>  
+    <h2>Cadastro</h2>
+    <form action="index.php" method="post">
+        <input type="text" placeholder="usuario" name="usuario">
+        <input type="text" placeholder="email" name="email">
+        <input type="password" placeholder="senha" name="senha">
+        <button type="submit">Entrar</button>
+    </form>
+    
+</body>
+</html>
