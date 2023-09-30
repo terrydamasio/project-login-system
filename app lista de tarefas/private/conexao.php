@@ -4,7 +4,7 @@
         private $host = 'localhost';
         private $dbname = 'app_lista_de_tarefas';
         private $user = 'root';
-        private $pass = '';
+        private $pass = '#Terrydamasio2021';
 
         public function conectar() {
 
