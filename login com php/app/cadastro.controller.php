@@ -1,23 +1,31 @@
 <?php
-
+    require "conexao.php";
     require "cadastro.model.php";
     require "cadastro.service.php";
-    require "conexao.php";
 
-    $cadastro = new Cadastro();
-    $cadastro->__set('nome', $_POST['nome']);
-    $cadastro->__set('email', $_POST['email']);
-    $cadastro->__set('senha', $_POST['senha']); 
+    $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
 
-    echo '<pre>';
-    print_r($cadastro);
-    echo '<pre>';
+    if($acao == 'cadastrar') {
 
-    $conexao = new Conexao();
+        if(!empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
+            $cadastro = new Cadastro();
+            $cadastro->__set('nome', $_POST['nome']);
+            $cadastro->__set('email', $_POST['email']);
+            $cadastro->__set('senha', $_POST['senha']);
 
-    $cadastroService = new CadastroService($conexao, $nome, $email, $senha);
-    $cadastroService->criarCadastro();
-    
-    echo '<pre>';
-    print_r($cadastroService);
-    echo '<pre>';
+            $conexao = new Conexao();
+            
+            $cadastroService = new CadastroService($conexao, $cadastro);
+            $cadastroService->cadastrar();
+
+            header('Location: index.php?cadastro=sucesso');
+        } else if(empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])) {    
+            header('Location: index.php?cadastro=erro');
+        }
+
+    } else if($acao == 'login') {
+        $cadastro = new Cadastro();
+
+    }
+
+?>

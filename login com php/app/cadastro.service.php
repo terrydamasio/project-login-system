@@ -2,36 +2,35 @@
 
     class CadastroService {
         private $conexao;
-        private $nome;
-        private $email;
-        private $senha;
+        private $cadastro;
 
-        public function __construct($conexao, $nome, $email, $senha)
-        {
+        public function __construct(Conexao $conexao, Cadastro $cadastro)
+        {   
             $this->conexao = $conexao->conectar();
-            $this->nome = $nome;
-            $this->email = $email;
-            $this->senha = $senha;
+            $this->cadastro = $cadastro;
         }
 
-        public function criarCadastro() {
+        public function cadastrar() { //create
             $query = 'insert into tb_usuarios(nome, email, senha) values(:nome, :email, :senha)';
             $stmt = $this->conexao->prepare($query);
-            $stmt->bindValue(':nome', $this->nome->__get('nome'));
-            $stmt->bindValue(':email', $this->email->__get('email'));
-            $stmt->bindValue(':senha', $this->senha->__get('senha'));
+            $stmt->bindValue(':nome', $this->cadastro->__get('nome'));
+            $stmt->bindValue(':email', $this->cadastro->__get('email'));
+            $stmt->bindValue(':senha', $this->cadastro->__get('senha'));
             $stmt->execute();
         }
 
-        public function recuperarCadastro() {
+        public function recuperarCadastro() { //read
+            $query = 'select * from tb_usuarios';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function atualizarCadastro() { //update
 
         }
 
-        public function atualizarCadastro() {
-
-        }
-
-        public function removerCadastro() {
+        public function deletarCadastro() { //delete
 
         }
 
