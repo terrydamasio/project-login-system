@@ -1,7 +1,3 @@
-<?php
-    $acao = 'login';
-    require "cadastro.controller.php";
-?>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +7,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form action="cadastro.controller.php" method="post">
+    <form action="login.controller.php" method="post">
         <p>
             <label for="">Email</label>
             <input type="email" name="email">
@@ -26,8 +22,8 @@
         <p>
             <button type="submit">Entrar</button>
         </p>
-        <?php if(isset($_GET['cadastro']) && $_GET['cadastro'] == 'sucesso') { ?>
-            <p style="color: green;">Cadastrado com sucesso. Efetue o login!</p>
+        <?php if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
+            <p style="color: red;">Preencha todos os campos para efetuar o login.</p>
         <?php } ?>
     </form>
 </body>

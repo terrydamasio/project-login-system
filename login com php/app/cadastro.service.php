@@ -1,5 +1,4 @@
 <?php
-
     class CadastroService {
         private $conexao;
         private $cadastro;

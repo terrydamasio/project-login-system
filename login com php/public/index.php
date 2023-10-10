@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Cadastro</h1>
-    <form action="cadastro.controller.php?acao=cadastrar" method="post">
+    <form action="cadastro.controller.php" method="post">
         <p>
             <label for="">Nome</label>
             <input type="text" name="nome">
@@ -29,7 +29,7 @@
         <?php if(isset($_GET['cadastro']) && $_GET['cadastro'] == 'erro') { ?>
             <p style="color: red;">Preencha todos os campos para efetuar o cadastro.</p>
         <?php } else if(isset($_GET['cadastro']) && $_GET['cadastro'] == 'sucesso') { ?>
-            <p style="color: green;">Cadastro efetuado com sucesso!</p>
+            <p style="color: green;">Cadastrado com sucesso! Efetue o login.</p>
         <?php } else if(isset($_GET['cadastro']) && $_GET['cadastro'] == 'erro2') { ?>
             <p style="color: red;">Já existe um usuário cadastrado com este email!</p>
         <?php } ?>
