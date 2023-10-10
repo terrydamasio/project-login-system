@@ -26,6 +26,9 @@
         <p>
             <button type="submit">Entrar</button>
         </p>
+        <?php if(isset($_GET['cadastro']) && $_GET['cadastro'] == 'sucesso') { ?>
+            <p style="color: green;">Cadastrado com sucesso. Efetue o login!</p>
+        <?php } ?>
     </form>
 </body>
 </html>
