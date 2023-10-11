@@ -24,8 +24,9 @@
 
         public function recuperarCadastro() { //read
             try {
-                $query = 'select * from tb_usuarios where email = :emal and senha = :senha';
+                $query = 'select * from tb_usuarios where nome = :nome and email = :email and senha = :senha';
                 $stmt = $this->conexao->prepare($query);
+                $stmt->bindValue(':nome', $this->cadastro->__get('nome'));
                 $stmt->bindValue(':email', $this->cadastro->__get('email'));
                 $stmt->bindValue(':senha', $this->cadastro->__get('senha'));
                 $stmt->execute();
@@ -53,6 +54,17 @@
             } catch(Exception $e) {
                 echo $e->getCode() . '<br>' . $e->getMessage();
             }
+        }
+
+        public function logout() {
+            session_start();
+            
+            unset($_SESSION['nome']);
+            unset($_SESSION['email']);
+            unset($_SESSION['senha']);
+
+            session_destroy();
+            header('Location: login.php');
         }
 
     }

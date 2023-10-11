@@ -24,6 +24,8 @@
         </p>
         <?php if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
             <p style="color: red;">Preencha todos os campos para efetuar o login.</p>
+        <?php } else if(isset($_GET['login']) && $_GET['login'] == 'erro2') { ?>
+            <p style="color: red;">Usuarios e/ou senhas incorretos.</p>
         <?php } ?>
     </form>
 </body>

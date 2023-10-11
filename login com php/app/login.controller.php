@@ -7,15 +7,34 @@
     use Cadastro;
     use Conexao;
 
-    $cadastro = new Cadastro();
-    $cadastro->__set('email', $_POST['email']);
-    $cadastro->__set('senha', $_POST['senha']);
 
-    if(isset($email) or isset($senha)) {
-        echo '';
+    if(!empty($_POST['email']) && !empty($_POST['senha'])) {
+        session_start();
+
+        $cadastro = new Cadastro();
+        $email = $cadastro->__set('email', $_POST['email']);
+        $senha = $cadastro->__set('senha', $_POST['senha']);
+
+        $conexao = new Conexao();
+
+        $cadastroService = new CadastroService($conexao, $cadastro);
+        $usuarios = $cadastroService->recuperarCadastro();
+        $row = $usuarios->fetchObject();
+
+        if($row->num_rows > 0) {
+            $_SESSION['email'] = $email;
+            $_SESSION['senha'] = $senha;
+            $_SESSION['tipo'] = $row->tipo;
+
+            header('Location: home.php');
+        } else {
+            header('Location: login.php?login=erro2');
+        }
+
+        
+
     } else {
-        header('Location: home.php');
-    }
-    
+        header('Location: login.php?login=erro');
+    } 
 
 ?>

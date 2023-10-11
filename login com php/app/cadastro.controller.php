@@ -15,7 +15,7 @@
 
         $conexao = new Conexao();
             
-        $cadastroService = new CadastroService($this->conexao, $this->cadastro);
+        $cadastroService = new CadastroService($conexao, $cadastro);
         $usuarios = $cadastroService->validaCadastro();
 
         if($usuarios->rowCount() >= 1) {
