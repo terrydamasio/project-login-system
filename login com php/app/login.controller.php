@@ -17,17 +17,17 @@
             $conexao = new Conexao();
     
             $cadastroService = new CadastroService($conexao, $cadastro);
-            $usuarios = $cadastroService->validaCadastro();
-            $row = $usuarios->fetchObject();
-            
-            //verificar variável $user e ver o que ela recebe
+            $result = $cadastroService->validaCadastro();
 
-            if($row->email == $emailForm && $row->senha == $senhaForm) {
-                $_SESSION['email'] = $emailForm;
+            //verificar variável $row e ver o que ela recebe e verificar condicionais de erro na página do login
+            if($result->rowCount() > 0) {
+                $row = $result->fetchObject();
+
+                $_SESSION['email'] = $row->email;
                 $_SESSION['nome'] = $row->nome;
                 $_SESSION['senha'] = $row->senha;
-
-                header('Location: home.php');
+                
+                header('Location: home.php'); 
             } else {
                 header('Location: login.php?login=erro2');
             }
