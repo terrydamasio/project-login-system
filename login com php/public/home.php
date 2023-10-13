@@ -1,8 +1,9 @@
 <?php 
     session_start();
     if(empty($_SESSION)) {
-        header('Location: login.php');
+        header('Location: login.php?login=erro3'); //redireciona se acessar rota sem logar
     }
+    require "login.controller.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +15,8 @@
 <body>
     <h1>Sucesso!</h1>
     <?php 
-        $cadastroService = new CadastroService();
-        $logout = $cadastroService->logout();
-
-
-        echo "Seja bem vindo, " . $_SESSION['email'] . "!";
-        print "<a href='$logout'>Sair</a>";
+        echo "<br>Seja bem vindo, " . $_SESSION['nome'] . "!";
     ?>
-    
+    <a href="logout">Sair</a>
 </body>
 </html>

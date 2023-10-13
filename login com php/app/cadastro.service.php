@@ -46,25 +46,15 @@
 
         public function validaCadastro() { //read
             try {
-                $query = "select * from tb_usuarios where email = :email";
+                $query = 'select * from tb_usuarios where email = :email and senha = :senha';
                 $stmt = $this->conexao->prepare($query);
                 $stmt->bindValue(':email', $this->cadastro->__get('email'));
+                $stmt->bindValue(':senha', $this->cadastro->__get('senha'));
                 $stmt->execute();
                 return $stmt;
             } catch(Exception $e) {
                 echo $e->getCode() . '<br>' . $e->getMessage();
             }
-        }
-
-        public function logout() {
-            session_start();
-            
-            unset($_SESSION['nome']);
-            unset($_SESSION['email']);
-            unset($_SESSION['senha']);
-
-            session_destroy();
-            header('Location: login.php');
         }
 
     }
