@@ -57,4 +57,8 @@
             }
         }
 
+        public function logout() {
+            
+        }
+
     }

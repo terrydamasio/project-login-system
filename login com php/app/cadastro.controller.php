@@ -1,11 +1,8 @@
-<?php namespace Cadastro;
+<?php
 
     require "conexao.php";
     require "cadastro.model.php";
     require "cadastro.service.php";
-    use CadastroService;
-    use Cadastro;
-    use Conexao;
 
     if(!empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
         $cadastro = new Cadastro();
