@@ -36,14 +36,6 @@
             }
         }
 
-        public function atualizarCadastro() { //update
-            
-        }
-
-        public function deletarCadastro() { //delete
-            
-        }
-
         public function validaCadastro() { //read
             try {
                 $query = 'select * from tb_usuarios where email = :email and senha = :senha';
@@ -55,10 +47,6 @@
             } catch(Exception $e) {
                 echo $e->getCode() . '<br>' . $e->getMessage();
             }
-        }
-
-        public function logout() {
-            
         }
 
     }
