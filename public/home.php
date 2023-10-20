@@ -29,7 +29,7 @@
             </div>
 
             <div class="#">
-                <h4>Seja bem vindo, <?= $_SESSION['nome'] ?></h4>
+                <h4>Seja bem vindo, <?= $_SESSION['nome']?></h4>
             </div>
         </div>
     </div>

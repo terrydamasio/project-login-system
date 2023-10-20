@@ -25,10 +25,10 @@
                    
             header('Location: home.php'); 
         } else {
-            header('Location: login.php?login=erro2');
+            header('Location: index.php?login=erro2');
         }
     } else { 
-        header('Location: login.php?login=erro');
+        header('Location: index.php?login=erro');
     }
     
 

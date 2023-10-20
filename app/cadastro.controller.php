@@ -15,14 +15,14 @@
         $cadastroService = new CadastroService($conexao, $cadastro);
         $usuarios = $cadastroService->validaCadastro();
 
-        if($usuarios->rowCount() >= 1) {
-            header('Location: index.php?cadastro=erro2'); //erro2 = usuario já existe            
+        if($usuarios->rowCount() > 0) {
+            header('Location: cadastro.php?cadastro=erro2'); //erro2 = usuario já existe            
         } else {
             $cadastroService->cadastrar(); 
-            header('Location: index.php?cadastro=sucesso');
+            header('Location: cadastro.php?cadastro=sucesso');
         }
 
     } else if(empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])) {    
-        header('Location: index.php?cadastro=erro');//erro = campos vazios
+        header('Location: cadastro.php?cadastro=erro');//erro = campos vazios
     }
 ?>
